@@ -1,0 +1,223 @@
+body {
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.container{
+    background-color: #fff;
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+}
+
+/* Group Play */
+.group-play{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pickem{
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #666;
+}
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+/* MVP Section */
+.mvp-section{
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.mvp-container{
+  display: flex;
+   gap: 10px;
+}
+.mvp-img-container img{
+  width: 200px;
+  height: 250px;
+  border-radius: 5px;
+    object-fit: cover;
+}
+.mvp-info{
+    display: flex;
+    flex-direction: column;
+}
+.mvp-info-top{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.mvp-info-top .flag {
+    width: 25px;
+    height: 20px;
+}
+.mvp-chart{
+    display: flex;
+    flex-direction: column;
+   gap: 5px;
+}
+.bar-container{
+  display: flex;
+  align-items: center;
+    gap: 10px;
+}
+.bar-container span:first-child{
+  font-size: 0.8em;
+  width: 30px;
+}
+/* EVP Section */
+.evp-section{
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.evp-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.evp-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 5px;
+    gap: 10px;
+    width: calc(50% - 10px); /* Two per row with spacing */
+}
+.evp-item img{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.evp-info{
+    display: flex;
+    flex-direction: column;
+}
+.evp-name-flag{
+     display: flex;
+     align-items: center;
+     gap: 5px;
+     font-weight: bold;
+}
+.evp-name-flag .flag {
+    width: 20px;
+    height: 15px;
+}
+
+.evp-info span:last-child{
+    font-size: 0.8em;
+}
+
+/* Tournament Info */
+.tournament-info{
+  width: 100%;
+    padding: 20px;
+  box-sizing: border-box;
+}
+
+.tournament-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.tournament-header img{
+    width: 200px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.tournament-details{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+.grouped-events{
+  display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.grouped-events div {
+  display: flex;
+   align-items: center;
+   gap: 10px;
+   margin-bottom: 5px;
+}
+.grouped-event-icon{
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+.grouped-events p{
+  font-size: 0.8em;
+}
+.prize-distribution{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.prize-grid {
+    display: grid;
+     grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+.prize-item{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid #ddd;
+    padding: 10px;
+}
+
+.prize-item img{
+    width: 25px;
+    height: 20px;
+}
