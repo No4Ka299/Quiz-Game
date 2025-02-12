@@ -3,243 +3,407 @@
 <head>
   <meta charset="UTF-8">
   <title>Untitled</title>
-  <link rel="stylesheet" href="./style.css">
+  
 
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Турнирная таблица</title>
-    <link rel="stylesheet" href="style.css">
+    <title>G3laZi - CS2 Team</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #1e272d, #151a1d);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background-color: rgba(40, 40, 40, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            margin: 20px;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #eee;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 2.5em;
+        }
+
+        .team-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .team-logo img {
+            max-width: 180px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .team-logo img:hover {
+            transform: scale(1.1);
+        }
+
+        h2 {
+            color: #ddd;
+            border-bottom: 1px solid #555;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.3em;
+        }
+
+        .team-members {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .team-members li {
+            margin: 10px;
+            padding: 10px 15px;
+            background-color: #333;
+            border-radius: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .team-members li:hover {
+            background-color: #444;
+        }
+
+        .team-members img {
+            width: 24px;
+            height: 18px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border: 1px solid #666;
+            border-radius: 3px;
+        }
+
+        .match-history {
+            margin-top: 30px;
+        }
+
+        .match-history table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #555;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .match-history th, .match-history td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #555;
+        }
+
+        .match-history th {
+            background-color: #444;
+            color: #ddd;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .match-history tbody tr:nth-child(even) {
+            background-color: #3a3a3a;
+        }
+
+        .flag {
+            width: 20px;
+            height: 15px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+
+        /* Стили для статистики с прогресс-барами */
+        .player-stats {
+            display: none;
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+
+        .player-stats h3 {
+            color: #eee;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .stat-item {
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            display: block;
+            color: #bbb;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            background-color: #555;
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 10px;
+            width: 0; /* Начальная ширина 0 */
+            border-radius: 5px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Цвета для прогресс-бара */
+        .progress.bad {
+            background-color: #f44336; /* Красный */
+        }
+
+        .progress.average {
+            background-color: #ffeb3b; /* Желтый */
+        }
+
+        .progress.good {
+            background-color: #4CAF50; /* Зеленый */
+        }
+
+        .stat-value {
+            float: right;
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <h1>G3laZi TEAM</h1>
 
-        <div class="tournament-info">
-            <div class="tournament-header">
-                 <img src="" alt="Tournament Logo" class="tournament-logo">
-                 <span>Finished</span>
-            </div>
-            
-            <div class="tournament-details">
-               <span>Date: 17 март 2024 – 20 март 2024</span>
-               <span>Prize pool: 500 RUB</span>
-                <span>Teams: 16</span>
-                <span>Location: Shanghai, China</span>
-            </div>
-
-              <div class="grouped-events">
-                    <h2>Grouped events</h2>
-                   <div>
-                        <img src="" alt="Grouped Event 1" class="grouped-event-icon">
-                      <span>PW Major Opening</span>
-                     <p> Nov 30th 2024 - Dec 3rd 2024</p>
-                    </div>
-              </div>
-
-             <div class="prize-distribution">
-                   <h2>Prize distribution</h2>
-                    <div class="prize-grid">
-                         <div class="prize-item">
-                            <img src="" alt="FlagRF.JPG">
-                           <span>1st</span>
-                           <span>$500,000</span>
-                        </div>
-                       <div class="prize-item">
-                            <img src="" alt="Ukraine Flag">
-                           <span>2nd</span>
-                           <span>$170,000</span>
-                        </div>
-                          <div class="prize-item">
-                               <img src="" alt="Germany Flag">
-                             <span>3-4th</span>
-                            <span>$80,000</span>
-                         </div>
-                       <div class="prize-item">
-                             <img src="" alt="USA Flag">
-                           <span>3-4th</span>
-                           <span>$80,000</span>
-                        </div>
-                         <div class="prize-item">
-                            <img src="" alt="France Flag">
-                           <span>5-8th</span>
-                            <span>$45,000</span>
-                        </div>
-                       <div class="prize-item">
-                            <img src="" alt="Denmark Flag">
-                           <span>5-8th</span>
-                            <span>$45,000</span>
-                        </div>
-                       <div class="prize-item">
-                             <img src="" alt="Brazil Flag">
-                           <span>5-8th</span>
-                           <span>$45,000</span>
-                        </div>
-                      <div class="prize-item">
-                             <img src="" alt="Brazil Flag">
-                           <span>5-8th</span>
-                             <span>$45,000</span>
-                        </div>
-                         <div class="prize-item">
-                             <img src="" alt="Brazil Flag">
-                            <span>9-11th</span>
-                            <span>$20,000</span>
-                        </div>
-                         <div class="prize-item">
-                             <img src="" alt="Brazil Flag">
-                             <span>9-11th</span>
-                             <span>$20,000</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="team-logo">
+            <img src="https://s.iimg.su/s/12/rgyIHbngBarJJ0P25ztNnHCpAoezIVyUMdTRFInc.png" alt="Логотип G3laZi">
         </div>
 
-         <div class="group-play">
-            <div class="table-header">
-                <h2>Group Swiss</h2>
-                <span class="pickem">Pick'Em</span>
+        <h2>Состав команды</h2>
+        <ul class="team-members">
+            <li data-stats='{
+                "Rating": "1.07",
+                "KRRatio": "1.17",
+                "KDRatio": "1.31",
+                "Headshots": "43"
+            }'>
+                <img class="flag" src="https://img-cdn.hltv.org/teamlogo/dElWLndJVJfK_rCdTRTQ65.png?ixlib=java-2.1.0&w=50&s=560fe2bfd5f4d690d7da3a55979b4b90" alt="Беларусь"> YAvMOMEDE
+            </li>
+            <li data-stats='{
+                "Rating": "0.60",
+                "KRRatio": "0.5",
+                "KDRatio": "0.6",
+                "Headshots": "67"
+            }'>
+                <img class="flag" src="https://img-cdn.hltv.org/teamlogo/3fuYwp-Cebug5SGvzCsEVv.png?ixlib=java-2.1.0&w=50&s=b8bc3ce09cbf1acaf4a8d09ee14580f5" alt="Россия"> vovansnus
+            </li>
+            <li data-stats='{
+                "Rating": "0.47",
+                "KRRatio": "0.44",
+                "KDRatio": "0.47",
+                "Headshots": "75"
+            }'>
+                <img class="flag" src="https://img-cdn.hltv.org/teamlogo/3fuYwp-Cebug5SGvzCsEVv.png?ixlib=java-2.1.0&w=50&s=b8bc3ce09cbf1acaf4a8d09ee14580f5" alt="Россия"> 2oom4ik
+            </li>
+            <li data-stats='{
+                "Rating": "0.47",
+                "KRRatio": "0.39",
+                "KDRatio": "0.47",
+                "Headshots": "43"
+            }'>
+                <img class="flag" src="https://img-cdn.hltv.org/teamlogo/3fuYwp-Cebug5SGvzCsEVv.png?ixlib=java-2.1.0&w=50&s=b8bc3ce09cbf1acaf4a8d09ee14580f5" alt="Россия"> No4Ka
+            </li>
+             <li data-stats='{
+                "Rating": "0.33",
+                "KRRatio": "0.28",
+                "KDRatio": "0.33",
+                "Headshots": "40"
+            }'>
+                <img class="flag" src="https://img-cdn.hltv.org/teamlogo/-PptzA5snKr8H-hx-16sRd.png?ixlib=java-2.1.0&w=50&s=0790c2e951ca1dafe283fe8128f34920" alt="Казахстан"> Ha4ku
+            </li>
+            <li data-stats='{
+                "Rating": "0",
+                "KRRatio": "0",
+                "KDRatio": "0",
+                "Headshots": "0"
+            }'>
+                <img class="flag" src="https://img-cdn.hltv.org/teamlogo/dElWLndJVJfK_rCdTRTQ65.png?ixlib=java-2.1.0&w=50&s=560fe2bfd5f4d690d7da3a55979b4b90" alt="Беларусь"> pakovv
+            </li>
+        </ul>
+
+        <div class="player-stats" id="playerStats">
+            <h3 id="playerName"></h3>
+            <div class="stat-item">
+                <span class="stat-label">Rating</span>
+                <div class="progress-bar">
+                    <div class="progress" id="ratingProgress"></div>
+                </div>
+                <span class="stat-value" id="ratingValue"></span>
             </div>
-          
-            <div class="table-container">
-                <table id="tournamentTable">
-                  <thead>
+            <div class="stat-item">
+                <span class="stat-label">K/R Ratio</span>
+                <div class="progress-bar">
+                    <div class="progress" id="krRatioProgress"></div>
+                </div>
+                <span class="stat-value" id="krRatioValue"></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">K/D Ratio</span>
+                 <div class="progress-bar">
+                    <div class="progress" id="kdRatioProgress"></div>
+                </div>
+                <span class="stat-value" id="kdRatioValue"></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Headshots %</span>
+                <div class="progress-bar">
+                    <div class="progress" id="headshotsProgress"></div>
+                </div>
+                <span class="stat-value" id="headshotsValue"></span>
+            </div>
+        </div>
+
+        <div class="match-history">
+            <h2>История матчей</h2>
+            <table>
+                <thead>
                     <tr>
-                       <th></th>
-                      <th>M</th>
-                      <th>RW</th>
-                      <th>RL</th>
-                      <th>RD</th>
-                      <th>Record</th>
-                      <th>E</th>
+                        <th>Турнир</th>
+                        <th>Соперник</th>
+                        <th>Счет</th>
                     </tr>
-                  </thead>
-                  <tbody id="tableBody">
-                     <!-- Team rows will be added here -->
-                  </tbody>
-                </table>
-            </div>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>OPEN QUAL 4 | CyberX Celebration Championship</td>
+                        <td>GELO</td>
+                        <td>GELO 13 - 5 G3laZi</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div class="mvp-section">
-             <h2>MVP</h2>
-             <div class="mvp-container">
-                  <div class="mvp-img-container">
-                      <img src="" alt="MVP Player Image">
-                  </div>
-                  
-                  <div class="mvp-info">
-                      <div class="mvp-info-top">
-                           <img src="" class="flag" alt="Country Flag">
-                            <span>Имя игрока</span>
-                      </div>
-                       <div class="mvp-chart">
-                           <div class="bar-container">
-                                 <span>0.99</span>
-                                <div class="bar" style="width: 60px; height: 30px; background-color: #1d79c6; border-radius: 4px;"></div>
-                                <span>KPR</span>
-                           </div>
-                             <div class="bar-container">
-                                <span>0.66</span>
-                                <div class="bar" style="width: 40px; height: 30px; background-color: #15a34f; border-radius: 4px;"></div>
-                                <span>DPR</span>
-                           </div>
-                            <div class="bar-container">
-                                <span>78.2%</span>
-                                <div class="bar" style="width: 100px; height: 30px; background-color: #15a34f; border-radius: 4px;"></div>
-                                <span>KAST</span>
-                           </div>
-                           <div class="bar-container">
-                                  <span>1.75</span>
-                                 <div class="bar" style="width: 100px; height: 30px; background-color: #1d79c6; border-radius: 4px;"></div>
-                                <span>Impact</span>
-                           </div>
-                           <div class="bar-container">
-                                 <span>101.4</span>
-                                 <div class="bar" style="width: 100px; height: 30px; background-color: #1d79c6; border-radius: 4px;"></div>
-                                <span>ADR</span>
-                           </div>
-                             <div class="bar-container">
-                                <span>1.49</span>
-                                 <div class="bar" style="width: 80px; height: 30px; background-color: #1d79c6; border-radius: 4px;"></div>
-                                <span>Rating 2.1</span>
-                           </div>
-                       </div>
-                  </div>
-             </div>
-        </div>
-
-          <div class="evp-section">
-                <h2>EVPs</h2>
-                <div class="evp-list">
-                    <div class="evp-item">
-                         <img src="" alt="Player1 Image">
-                        <div class="evp-info">
-                            <div class="evp-name-flag">
-                                 <img src="" class="flag" alt="France Flag">
-                                <span>Player Name 1</span>
-                            </div>
-                            <span>1.37</span>
-                             <span>Rating 2.1</span>
-                        </div>
-                    </div>
-                   
-                       <div class="evp-item">
-                            <img src="" alt="Player2 Image">
-                           <div class="evp-info">
-                             <div class="evp-name-flag">
-                                 <img src="" class="flag" alt="Bosnia Flag">
-                                 <span>Player Name 2</span>
-                            </div>
-                                <span>1.26</span>
-                                <span>Rating 2.1</span>
-                           </div>
-                        </div>
-                       <div class="evp-item">
-                             <img src="" alt="Player3 Image">
-                           <div class="evp-info">
-                             <div class="evp-name-flag">
-                                 <img src="" class="flag" alt="Estonia Flag">
-                                 <span>Player Name 3</span>
-                            </div>
-                                <span>1.21</span>
-                                <span>Rating 2.1</span>
-                           </div>
-                        </div>
-                       <div class="evp-item">
-                            <img src="" alt="Player4 Image">
-                            <div class="evp-info">
-                             <div class="evp-name-flag">
-                                <img src="" class="flag" alt="Russia Flag">
-                                 <span>Player Name 4</span>
-                            </div>
-                                <span>1.15</span>
-                                <span>Rating 2.1</span>
-                            </div>
-                       </div>
-                       <div class="evp-item">
-                         <img src="" alt="Player5 Image">
-                           <div class="evp-info">
-                             <div class="evp-name-flag">
-                                 <img src="" class="flag" alt="Russia Flag">
-                                 <span>Player Name 5</span>
-                            </div>
-                                <span>1.14</span>
-                                <span>Rating 2.1</span>
-                            </div>
-                       </div>
-                </div>
-         </div>
-
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const teamMembers = document.querySelectorAll('.team-members li');
+        const playerStatsDiv = document.getElementById('playerStats');
+        const playerName = document.getElementById('playerName');
+        const ratingValue = document.getElementById('ratingValue');
+        const ratingProgress = document.getElementById('ratingProgress');
+        const krRatioValue = document.getElementById('krRatioValue');
+         const krRatioProgress = document.getElementById('krRatioProgress');
+        const kdRatioValue = document.getElementById('kdRatioValue');
+         const kdRatioProgress = document.getElementById('kdRatioProgress');
+        const headshotsValue = document.getElementById('headshotsValue');
+        const headshotsProgress = document.getElementById('headshotsProgress');
+
+        function setRatingColor(rating, element) {
+            element.classList.remove('bad', 'average', 'good');
+            if (rating < 0.6) {
+                element.classList.add('bad');
+            } else if (rating < 1.02) {
+                element.classList.add('average');
+            } else {
+                element.classList.add('good');
+            }
+        }
+
+        teamMembers.forEach(member => {
+            member.addEventListener('click', () => {
+                const stats = JSON.parse(member.getAttribute('data-stats'));
+                const name = member.textContent.trim();
+
+                if (stats) {
+                    playerName.textContent = name + " statistics";
+
+                    // Преобразуем значения в проценты
+                    const ratingPercent = Math.min((stats.Rating / 2) * 100, 100);
+                    const krRatioPercent = Math.min((stats.KRRatio / 2) * 100, 100);
+                    const kdRatioPercent = Math.min((stats.KDRatio / 2) * 100, 100);
+                    const headshotsPercent = Math.min(stats.Headshots, 100);
+
+                    ratingValue.textContent = stats.Rating;
+                    ratingProgress.style.width = ratingPercent + '%';
+                    setRatingColor(stats.Rating, ratingProgress);
+
+                    krRatioValue.textContent = stats.KRRatio;
+                    krRatioProgress.style.width = krRatioPercent + '%';
+                    setRatingColor(stats.KRRatio, krRatioProgress);
+
+                    kdRatioValue.textContent = stats.KDRatio;
+                    kdRatioProgress.style.width = kdRatioPercent + '%';
+                     setRatingColor(stats.KDRatio, kdRatioProgress);
+
+                    headshotsValue.textContent = stats.Headshots + '%';
+                    headshotsProgress.style.width = headshotsPercent + '%';
+                      setRatingColor(stats.Headshots / 100 * 2, headshotsProgress);
+
+                    playerStatsDiv.style.display = 'block';
+                } else {
+                    playerName.textContent = name + " statistics";
+                    ratingValue.textContent = 'Нет данных';
+                    ratingProgress.style.width = '0%';
+                     ratingProgress.classList.remove('bad', 'average', 'good');
+
+                    krRatioValue.textContent = 'Нет данных';
+                    krRatioProgress.style.width = '0%';
+                      krRatioProgress.classList.remove('bad', 'average', 'good');
+
+                    kdRatioValue.textContent = 'Нет данных';
+                    kdRatioProgress.style.width = '0%';
+                        kdRatioProgress.classList.remove('bad', 'average', 'good');
+
+                    headshotsValue.textContent = 'Нет данных';
+                    headshotsProgress.style.width = '0%';
+                      headshotsProgress.classList.remove('bad', 'average', 'good');
+
+                    playerStatsDiv.style.display = 'block';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 <!-- partial -->
-  <script  src="./script.js"></script>
-
+  
 </body>
 </html>
